@@ -10,3 +10,8 @@ class SuperMcVerifyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SuperMc
         fields = ['phone', 'key']
+
+class SuperMcResetKey(serializers.ModelSerializer):
+    class Meta:
+        model = SuperMc
+        fields = ['phone', 'key']

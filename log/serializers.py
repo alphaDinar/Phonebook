@@ -6,6 +6,11 @@ class SuperMcSerializer(serializers.ModelSerializer):
         model = SuperMc
         fields = ['id', 'username', 'phone' ,'key']
 
+class SuperMcContactListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SuperMc
+        fields = ['phone']
+
 class SuperMcVerifyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SuperMc

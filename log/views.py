@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .models import SuperMc
+import json
 from django.contrib.auth.hashers import make_password, check_password
-from .serializers import SuperMcSerializer,SuperMcVerifyUserSerializer
+from .serializers import SuperMcSerializer,SuperMcContactListSerializer,SuperMcVerifyUserSerializer,SuperMcResetKey
 
 class SuperMcRegister(viewsets.ModelViewSet):
     queryset = SuperMc.objects.all()
@@ -21,6 +22,18 @@ class SuperMcRegister(viewsets.ModelViewSet):
         else:
             return Response({'status': 400, 'message': 'Phone number already registered'})
     
+class SuperMcContactList(viewsets.ModelViewSet):
+    queryset = SuperMc.objects.all()
+    serializer_class = SuperMcContactListSerializer
+    http_method_names = ['get']
+    
+    def list(self, request, *args, **kwargs):
+        contact_list = []
+        for item in SuperMc.objects.all():
+            contact_list.append(item.phone)
+        return Response({'contactList' : contact_list})
+
+
 class SuperMcVerifyUser(viewsets.ModelViewSet):
     queryset = SuperMc.objects.all()
     serializer_class = SuperMcVerifyUserSerializer
@@ -38,7 +51,7 @@ class SuperMcVerifyUser(viewsets.ModelViewSet):
 
 class SuperMcResetKey(viewsets.ModelViewSet):
     queryset = SuperMc.objects.all()
-    serializer_class = SuperMcVerifyUserSerializer
+    serializer_class = SuperMcResetKey
     http_method_names = ['post']
 
     def create(self, request, *args, **kwargs):

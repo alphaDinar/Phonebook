@@ -4,7 +4,7 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'supermc_register', views.SuperMcRegister, basename='supermc_register')
-router.register(r'supermc_check_register', views.SuperMcCheckRegister, basename='supermc_check_register')
+router.register(r'supermc_verify_user', views.SuperMcVerifyUser, basename='supermc_verify_user')
 
 urlpatterns = [
     path('', include(router.urls)),

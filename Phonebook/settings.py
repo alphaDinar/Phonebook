@@ -68,17 +68,17 @@ WSGI_APPLICATION = 'Phonebook.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # DATABASES = {
-#     'default': dj_database_url.parse('postgresql://postgres:43a3fffFAB36f5GeD1a64f3BFeGcAA3A@viaduct.proxy.rlwy.net:55154/railway')
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+
+DATABASES = {
+    'default': dj_database_url.parse('postgresql://postgres:43a3fffFAB36f5GeD1a64f3BFeGcAA3A@viaduct.proxy.rlwy.net:55154/railway')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

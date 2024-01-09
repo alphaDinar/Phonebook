@@ -43,7 +43,7 @@ class SuperMcVerifyUser(viewsets.ModelViewSet):
         if SuperMc.objects.filter(phone=request.data['phone']).exists():
             customer = SuperMc.objects.get(phone=request.data['phone'])
             if check_password(request.data['key'],customer.key):
-                return Response({'status': 200, 'email': f'{customer.login_password}', 'password' : f'{customer.login_email}'})
+                return Response({'status': 200, 'email': f'{customer.login_email}', 'password' : f'{customer.login_password}'})
             else:
                 return Response({'status': 400})
         else:

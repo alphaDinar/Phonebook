@@ -11,8 +11,6 @@ class SuperMcContactListSerializer(serializers.ModelSerializer):
         model = SuperMc
         fields = ['phone']
 
-# CustomerData
-
 class SuperMcVerifyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SuperMc
@@ -22,3 +20,8 @@ class SuperMcResetKey(serializers.ModelSerializer):
     class Meta:
         model = SuperMc
         fields = ['phone', 'key']
+
+class SuperMcGetKeySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SuperMc
+        fields = ['phone']

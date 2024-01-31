@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from .models import SuperMc
 import json
 from django.contrib.auth.hashers import make_password, check_password
-from .serializers import SuperMcSerializer,SuperMcContactListSerializer,SuperMcVerifyUserSerializer,SuperMcResetKey
+from .serializers import SuperMcSerializer,SuperMcContactListSerializer,SuperMcVerifyUserSerializer,SuperMcResetKey,SuperMcGetKeySerializer
 
 class SuperMcRegister(viewsets.ModelViewSet):
     queryset = SuperMc.objects.all()
@@ -63,4 +63,16 @@ class SuperMcResetKey(viewsets.ModelViewSet):
             status = 200
         else:
             status = 400
-        return Response({'status': f'{status}'})
+        return Response({'status': status})
+
+class SuperMcGetKey(viewsets.ModelViewSet):
+    queryset = SuperMc.objects.all()
+    serializer_class = SuperMcGetKeySerializer
+    http_method_names = ['post']
+
+    def create(self, request, *args, **kwargs):
+        if SuperMc.objects.filter(phone=request.data['phone']).exists():
+            customer = SuperMc.objects.get(phone=request.data['phone'])
+            return Response({'status': 200, 'email': f'{customer.login_email}', 'password' : f'{customer.login_password}'})
+        else:
+            return Response({'status': 400})
